@@ -1,12 +1,12 @@
-class User {
+class LoginModel {
   String name;
   String mail;
   String password;
   bool keepOn;
 
-  User({this.name, this.mail, this.password, this.keepOn});
+  LoginModel({this.name, this.mail, this.password, this.keepOn});
 
-  User.fromJson(Map<String, dynamic> json) {
+  LoginModel.fromJson(Map<String, dynamic> json) {
     name = json['name'];
     mail = json['mail'];
     password = json['password'];

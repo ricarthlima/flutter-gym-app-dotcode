@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gym_app/models/user_model.dart';
-import 'package:gym_app/screens/home.dart';
-import 'package:gym_app/screens/login_screen.dart';
-import 'package:gym_app/screens/sign_up_screen.dart';
+import 'package:gym_app/pages/login/login_page.dart';
 
 void main() {
   runApp(MyApp());
@@ -14,7 +11,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Gym App',
-      home: LoginScreen(),
+      home: LoginPage(),
       debugShowCheckedModeBanner: false,
     );
   }

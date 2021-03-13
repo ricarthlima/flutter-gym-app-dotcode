@@ -1,17 +1,17 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:gym_app/models/user_model.dart';
-import 'package:gym_app/values/custom_colors.dart';
-import 'package:gym_app/values/preferences_keys.dart';
+import 'package:gym_app/shared/constants/custom_colors.dart';
+import 'package:gym_app/shared/constants/preferences_keys.dart';
+import 'package:gym_app/shared/models/login_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class SignUpScreen extends StatefulWidget {
+class SignUpPage extends StatefulWidget {
   @override
-  _SignUpScreenState createState() => _SignUpScreenState();
+  _SignUpPageState createState() => _SignUpPageState();
 }
 
-class _SignUpScreenState extends State<SignUpScreen> {
+class _SignUpPageState extends State<SignUpPage> {
   TextEditingController _nameInputController = TextEditingController();
   TextEditingController _mailInputController = TextEditingController();
   TextEditingController _passwordInputController = TextEditingController();
@@ -186,6 +186,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   ],
                 ),
               ),
+              // ignore: deprecated_member_use
               RaisedButton(
                 onPressed: () {
                   _doSignUp();
@@ -205,7 +206,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   }
 
   void _doSignUp() {
-    User newUser = User(
+    LoginModel newUser = LoginModel(
       name: _nameInputController.text,
       mail: _mailInputController.text,
       password: _passwordInputController.text,
@@ -215,7 +216,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
     _saveUser(newUser);
   }
 
-  void _saveUser(User user) async {
+  void _saveUser(LoginModel user) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setString(
       PreferencesKeys.activeUser,
