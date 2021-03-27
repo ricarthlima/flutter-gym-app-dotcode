@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:gym_app/pages/sign_up/sign_up_service.dart';
 import 'package:gym_app/shared/constants/custom_colors.dart';
 import 'package:gym_app/shared/constants/preferences_keys.dart';
 import 'package:gym_app/shared/models/login_model.dart';
@@ -18,6 +19,8 @@ class _SignUpPageState extends State<SignUpPage> {
   TextEditingController _confirmInputController = TextEditingController();
 
   bool showPassword = false;
+
+  final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,9 +58,16 @@ class _SignUpPageState extends State<SignUpPage> {
                 padding: EdgeInsets.only(bottom: 10),
               ),
               Form(
+                key: _formKey,
                 child: Column(
                   children: [
                     TextFormField(
+                      validator: (value) {
+                        if (value.length < 10) {
+                          return "Digite um nome maior";
+                        }
+                        return null;
+                      },
                       controller: _nameInputController,
                       autofocus: true,
                       style: TextStyle(color: Colors.white),
@@ -83,6 +93,14 @@ class _SignUpPageState extends State<SignUpPage> {
                       ),
                     ),
                     TextFormField(
+                      validator: (value) {
+                        if (value.length < 5) {
+                          return "Esse e-mail parece curto demais";
+                        } else if (!value.contains("@")) {
+                          return "Esse e-mail está meio estranho, não?";
+                        }
+                        return null;
+                      },
                       controller: _mailInputController,
                       autofocus: true,
                       style: TextStyle(color: Colors.white),
@@ -113,6 +131,12 @@ class _SignUpPageState extends State<SignUpPage> {
                       ),
                     ),
                     TextFormField(
+                      validator: (value) {
+                        if (value.length < 6) {
+                          return "A senha deve ter pelo menos 6 caracteres";
+                        }
+                        return null;
+                      },
                       controller: _passwordInputController,
                       obscureText: (this.showPassword == true) ? false : true,
                       style: TextStyle(color: Colors.white),
@@ -139,6 +163,12 @@ class _SignUpPageState extends State<SignUpPage> {
                     ),
                     (this.showPassword == false)
                         ? TextFormField(
+                            validator: (value) {
+                              if (value != _passwordInputController.text) {
+                                return "As senhas devem ser iguais";
+                              }
+                              return null;
+                            },
                             controller: _confirmInputController,
                             obscureText: true,
                             style: TextStyle(color: Colors.white),
@@ -190,7 +220,6 @@ class _SignUpPageState extends State<SignUpPage> {
               RaisedButton(
                 onPressed: () {
                   _doSignUp();
-                  Navigator.pop(context);
                 },
                 child: Text("Casdastrar"),
                 color: CustomColors().getActiveSecondaryButton(),
@@ -206,14 +235,23 @@ class _SignUpPageState extends State<SignUpPage> {
   }
 
   void _doSignUp() {
-    LoginModel newUser = LoginModel(
-      name: _nameInputController.text,
-      mail: _mailInputController.text,
-      password: _passwordInputController.text,
-      keepOn: true,
-    );
+    if (_formKey.currentState.validate()) {
+      SignUpService().signUp(
+        _mailInputController.text,
+        _passwordInputController.text,
+      );
+    } else {
+      print("invalido");
+    }
 
-    _saveUser(newUser);
+    // LoginModel newUser = LoginModel(
+    //   name: _nameInputController.text,
+    //   mail: _mailInputController.text,
+    //   password: _passwordInputController.text,
+    //   keepOn: true,
+    // );
+
+    // _saveUser(newUser);
   }
 
   void _saveUser(LoginModel user) async {

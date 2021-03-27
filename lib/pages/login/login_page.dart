@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:gym_app/pages/login/login_service.dart';
 import 'package:gym_app/pages/sign_up/sign_up_page.dart';
 import 'package:gym_app/shared/constants/custom_colors.dart';
 import 'package:gym_app/shared/constants/preferences_keys.dart';
@@ -15,7 +16,9 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   TextEditingController _mailInputController = TextEditingController();
   TextEditingController _passwordInputController = TextEditingController();
-  bool continueConnected = false;
+  bool _obscurePassword = true;
+
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -57,9 +60,18 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ),
               Form(
+                key: _formKey,
                 child: Column(
                   children: [
                     TextFormField(
+                      validator: (value) {
+                        if (value.length < 5) {
+                          return "Esse e-mail parece curto demais";
+                        } else if (!value.contains("@")) {
+                          return "Esse e-mail está meio estranho, não?";
+                        }
+                        return null;
+                      },
                       controller: _mailInputController,
                       autofocus: true,
                       style: TextStyle(color: Colors.white),
@@ -85,6 +97,13 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                     ),
                     TextFormField(
+                      validator: (value) {
+                        if (value.length < 6) {
+                          return "A senha deve ter pelo menos 6 caracteres";
+                        }
+                        return null;
+                      },
+                      obscureText: _obscurePassword,
                       controller: _passwordInputController,
                       style: TextStyle(color: Colors.white),
                       decoration: InputDecoration(
@@ -125,20 +144,19 @@ class _LoginPageState extends State<LoginPage> {
                   textAlign: TextAlign.right,
                 ),
               ),
-              Padding(padding: EdgeInsets.only(bottom: 10)),
               Row(
                 children: [
                   Checkbox(
-                    value: this.continueConnected,
+                    value: this._obscurePassword,
                     onChanged: (bool newValue) {
                       setState(() {
-                        this.continueConnected = newValue;
+                        this._obscurePassword = newValue;
                       });
                     },
                     activeColor: Colors.blue,
                   ),
                   Text(
-                    "Continuar contectado?",
+                    "Mostrar senha",
                     style: TextStyle(
                       color: Colors.white,
                     ),
@@ -204,27 +222,23 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   void _doLogin() async {
-    String mailForm = this._mailInputController.text;
-    String passForm = this._passwordInputController.text;
-
-    LoginModel savedUser = await _getSavedUser();
-
-    if (mailForm == savedUser.mail && passForm == savedUser.password) {
-      print("LOGIN EFETUADO COM SUCESSO.");
+    if (_formKey.currentState.validate()) {
+      LoginService()
+          .login(_mailInputController.text, _passwordInputController.text);
     } else {
-      print("FALHA NO LOGIN");
+      print("invalido");
     }
   }
 
-  Future<LoginModel> _getSavedUser() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    String jsonUser = prefs.getString(PreferencesKeys.activeUser);
-    print(jsonUser);
+  // Future<LoginModel> _getSavedUser() async {
+  //   SharedPreferences prefs = await SharedPreferences.getInstance();
+  //   String jsonUser = prefs.getString(PreferencesKeys.activeUser);
+  //   print(jsonUser);
 
-    Map<String, dynamic> mapUser = json.decode(jsonUser);
-    LoginModel user = LoginModel.fromJson(mapUser);
-    return user;
-  }
+  //   Map<String, dynamic> mapUser = json.decode(jsonUser);
+  //   LoginModel user = LoginModel.fromJson(mapUser);
+  //   return user;
+  // }
 }
 
 // WIDGETS

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:gym_app/pages/learn_firebase.dart';
 import 'package:gym_app/pages/login/login_page.dart';
 
 void main() {
@@ -12,7 +11,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Gym App',
-      home: LearnFirebase(),
+      home: LoginPage(),
       debugShowCheckedModeBanner: false,
     );
   }
