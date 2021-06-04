@@ -16,6 +16,14 @@ class _HomePageContentState extends State<HomePageContent> {
       title: "Academia - O Club",
       assetIcon: "assets/icons/gym_icon.png",
     ),
+    HomeListModel(
+      title: "Biometa Academia",
+      assetIcon: "assets/icons/gym_icon.png",
+    ),
+    HomeListModel(
+      title: "Academia Titanium Core",
+      assetIcon: "assets/icons/gym_icon.png",
+    )
   ];
 
   @override
@@ -32,15 +40,16 @@ class _HomePageContentState extends State<HomePageContent> {
         ),
       ),
       padding: EdgeInsets.symmetric(
-        vertical: 50,
+        vertical: 40,
         horizontal: 20,
       ),
-      child: ListView(
-        children: [
-          HomeListItem(
-            homeListModel: listMockedList[0],
-          )
-        ],
+      child: ListView.builder(
+        itemCount: listMockedList.length,
+        itemBuilder: (context, index) {
+          return HomeListItem(
+            homeListModel: listMockedList[index],
+          );
+        },
       ),
     );
   }
