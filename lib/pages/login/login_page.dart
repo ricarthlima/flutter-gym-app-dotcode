@@ -1,12 +1,7 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:gym_app/pages/login/login_service.dart';
 import 'package:gym_app/pages/sign_up/sign_up_page.dart';
 import 'package:gym_app/shared/constants/custom_colors.dart';
-import 'package:gym_app/shared/constants/preferences_keys.dart';
-import 'package:gym_app/shared/models/login_model.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginPage extends StatefulWidget {
   @override
