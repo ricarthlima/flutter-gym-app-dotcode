@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:gym_app/pages/home/home_widgets/home_appbar.dart';
+import 'package:gym_app/pages/home/home_widgets/home_content.dart';
+import 'package:gym_app/pages/home/home_widgets/home_drawer.dart';
+import 'package:gym_app/pages/home/home_widgets/home_fab.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -11,29 +15,10 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leading: Icon(Icons.menu),
-        title: Text("Gym App"),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          setState(() {
-            i = i + 1;
-          });
-        },
-        child: Icon(Icons.add),
-      ),
-      body: Center(
-        child: Container(
-          child: Text(
-            i.toString(),
-            style: TextStyle(
-              color: Colors.blue,
-              fontSize: 72,
-            ),
-          ),
-        ),
-      ),
+      appBar: getHomeAppBar(),
+      drawer: getHomeDrawer(),
+      floatingActionButton: getHomeFab(),
+      body: HomePageContent(),
     );
   }
 }

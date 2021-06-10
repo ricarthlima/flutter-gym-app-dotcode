@@ -254,6 +254,7 @@ class _SignUpPageState extends State<SignUpPage> {
     // _saveUser(newUser);
   }
 
+  // ignore: unused_element
   void _saveUser(LoginModel user) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setString(
