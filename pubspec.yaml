@@ -29,6 +29,7 @@ dependencies:
   cupertino_icons: ^1.0.1
   shared_preferences: ^0.5.12+4
   http: ^0.12.2
+  modal_bottom_sheet: ^2.0.0
 
 dev_dependencies:
   flutter_test:
