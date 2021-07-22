@@ -23,212 +23,152 @@ class _SignUpPageState extends State<SignUpPage> {
   final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        padding: EdgeInsets.symmetric(
-          vertical: 50,
-          horizontal: 50,
+    return Container(
+      padding: EdgeInsets.symmetric(
+        vertical: 40,
+        horizontal: 30,
+      ),
+      height: MediaQuery.of(context).size.height * 0.9,
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          colors: [
+            Colors.white,
+            CustomColors().getGradientMainColor(),
+          ],
         ),
-        width: MediaQuery.of(context).size.width,
-        height: MediaQuery.of(context).size.height,
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [
-              CustomColors().getGradientSecondaryColor(),
-              CustomColors().getGradientMainColor(),
-            ],
-          ),
-        ),
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Text(
-                "Cadastro",
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                ),
+      ),
+      child: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Text(
+              "Cadastre-se!",
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
               ),
-              Padding(
-                padding: EdgeInsets.only(bottom: 10),
-              ),
-              Form(
-                key: _formKey,
-                child: Column(
-                  children: [
-                    TextFormField(
-                      validator: (value) {
-                        if (value.length < 10) {
-                          return "Digite um nome maior";
-                        }
-                        return null;
-                      },
-                      controller: _nameInputController,
-                      autofocus: true,
-                      style: TextStyle(color: Colors.white),
-                      decoration: InputDecoration(
-                        labelText: "Nome Completo",
-                        labelStyle: TextStyle(
-                          color: Colors.white,
-                        ),
-                        prefixIcon: Icon(
-                          Icons.person,
-                          color: Colors.white,
-                        ),
-                        focusedBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Colors.white,
-                          ),
-                        ),
-                        enabledBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Colors.white,
-                          ),
-                        ),
+            ),
+            Padding(
+              padding: EdgeInsets.only(bottom: 10),
+            ),
+            Form(
+              key: _formKey,
+              child: Column(
+                children: [
+                  TextFormField(
+                    validator: (value) {
+                      if (value.length < 10) {
+                        return "Digite um nome maior";
+                      }
+                      return null;
+                    },
+                    controller: _nameInputController,
+                    autofocus: true,
+                    decoration: InputDecoration(
+                      labelText: "Nome Completo",
+                      prefixIcon: Icon(
+                        Icons.person,
+                      ),
+                      focusedBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(),
+                      ),
+                      enabledBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(),
                       ),
                     ),
-                    TextFormField(
-                      validator: (value) {
-                        if (value.length < 5) {
-                          return "Esse e-mail parece curto demais";
-                        } else if (!value.contains("@")) {
-                          return "Esse e-mail está meio estranho, não?";
-                        }
-                        return null;
-                      },
-                      controller: _mailInputController,
-                      autofocus: true,
-                      style: TextStyle(color: Colors.white),
-                      decoration: InputDecoration(
-                        labelText: "E-mail",
-                        labelStyle: TextStyle(
-                          color: Colors.white,
-                        ),
-                        prefixIcon: Icon(
-                          Icons.mail_outline,
-                          color: Colors.white,
-                        ),
-                        focusedBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Colors.white,
-                          ),
-                        ),
-                        enabledBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Colors.white,
-                          ),
-                        ),
+                  ),
+                  TextFormField(
+                    validator: (value) {
+                      if (value.length < 5) {
+                        return "Esse e-mail parece curto demais";
+                      } else if (!value.contains("@")) {
+                        return "Esse e-mail está meio estranho, não?";
+                      }
+                      return null;
+                    },
+                    controller: _mailInputController,
+                    autofocus: true,
+                    decoration: InputDecoration(
+                      labelText: "E-mail",
+                      prefixIcon: Icon(
+                        Icons.mail_outline,
                       ),
                     ),
-                    Padding(
-                      padding: EdgeInsets.only(
-                        bottom: 15,
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(
+                      bottom: 15,
+                    ),
+                  ),
+                  TextFormField(
+                    validator: (value) {
+                      if (value.length < 6) {
+                        return "A senha deve ter pelo menos 6 caracteres";
+                      }
+                      return null;
+                    },
+                    controller: _passwordInputController,
+                    obscureText: (this.showPassword == true) ? false : true,
+                    decoration: InputDecoration(
+                      labelText: "Senha",
+                      prefixIcon: Icon(
+                        Icons.vpn_key_sharp,
                       ),
                     ),
-                    TextFormField(
-                      validator: (value) {
-                        if (value.length < 6) {
-                          return "A senha deve ter pelo menos 6 caracteres";
-                        }
-                        return null;
-                      },
-                      controller: _passwordInputController,
-                      obscureText: (this.showPassword == true) ? false : true,
-                      style: TextStyle(color: Colors.white),
-                      decoration: InputDecoration(
-                        labelText: "Senha",
-                        labelStyle: TextStyle(
-                          color: Colors.white,
-                        ),
-                        prefixIcon: Icon(
-                          Icons.vpn_key_sharp,
-                          color: Colors.white,
-                        ),
-                        focusedBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Colors.white,
-                          ),
-                        ),
-                        enabledBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Colors.white,
-                          ),
-                        ),
-                      ),
-                    ),
-                    (this.showPassword == false)
-                        ? TextFormField(
-                            validator: (value) {
-                              if (value != _passwordInputController.text) {
-                                return "As senhas devem ser iguais";
-                              }
-                              return null;
-                            },
-                            controller: _confirmInputController,
-                            obscureText: true,
-                            style: TextStyle(color: Colors.white),
-                            decoration: InputDecoration(
-                              labelText: "Confirme a Senha",
-                              labelStyle: TextStyle(
-                                color: Colors.white,
-                              ),
-                              prefixIcon: Icon(
-                                Icons.vpn_key_sharp,
-                                color: Colors.white,
-                              ),
-                              focusedBorder: UnderlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: Colors.white,
-                                ),
-                              ),
-                              enabledBorder: UnderlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: Colors.white,
-                                ),
-                              ),
-                            ),
-                          )
-                        : Container(),
-                    Row(
-                      children: [
-                        Checkbox(
-                          value: this.showPassword,
-                          onChanged: (bool newValue) {
-                            setState(() {
-                              this.showPassword = newValue;
-                            });
+                  ),
+                  (this.showPassword == false)
+                      ? TextFormField(
+                          validator: (value) {
+                            if (value != _passwordInputController.text) {
+                              return "As senhas devem ser iguais";
+                            }
+                            return null;
                           },
-                          activeColor: Colors.blue,
-                        ),
-                        Text(
-                          "Mostrar senha",
-                          style: TextStyle(
-                            color: Colors.white,
+                          controller: _confirmInputController,
+                          obscureText: true,
+                          decoration: InputDecoration(
+                            labelText: "Confirme a Senha",
+                            prefixIcon: Icon(
+                              Icons.vpn_key_sharp,
+                            ),
                           ),
                         )
-                      ],
-                    ),
-                  ],
-                ),
+                      : Container(),
+                  Row(
+                    children: [
+                      Checkbox(
+                        value: this.showPassword,
+                        onChanged: (bool newValue) {
+                          setState(() {
+                            this.showPassword = newValue;
+                          });
+                        },
+                        activeColor: Colors.blue,
+                      ),
+                      Text(
+                        "Mostrar senha",
+                        style: TextStyle(),
+                      )
+                    ],
+                  ),
+                ],
               ),
-              // ignore: deprecated_member_use
-              RaisedButton(
-                onPressed: () {
-                  _doSignUp();
-                },
-                child: Text("Casdastrar"),
-                color: CustomColors().getActiveSecondaryButton(),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(50),
-                ),
+            ),
+            // ignore: deprecated_member_use
+            RaisedButton(
+              onPressed: () {
+                _doSignUp();
+              },
+              child: Text("Casdastrar"),
+              color: CustomColors().getActiveSecondaryButton(),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(50),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
