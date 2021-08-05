@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:gym_app/pages/login/login_service.dart';
 import 'package:gym_app/pages/login/widgets/login_form.dart';
 import 'package:gym_app/pages/login/widgets/login_signup_invite.dart';
-import 'package:gym_app/pages/sign_up/sign_up_page.dart';
 import 'package:gym_app/shared/constants/custom_colors.dart';
 
 class LoginPage extends StatefulWidget {
