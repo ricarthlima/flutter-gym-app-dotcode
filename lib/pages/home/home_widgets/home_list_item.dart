@@ -3,7 +3,7 @@ import 'package:gym_app/pages/home/home_widgets/home_list_model.dart';
 import 'package:gym_app/shared/constants/custom_colors.dart';
 
 class HomeListItem extends StatefulWidget {
-  final HomeListModel homeListModel;
+  final HomeListModel? homeListModel;
   HomeListItem({this.homeListModel});
 
   @override
@@ -42,10 +42,10 @@ class _HomeListItemState extends State<HomeListItem> {
                 children: [
                   Row(
                     children: [
-                      Image.asset(widget.homeListModel.assetIcon),
+                      Image.asset(widget.homeListModel!.assetIcon!),
                       Padding(padding: EdgeInsets.only(left: 15)),
                       Text(
-                        widget.homeListModel.title,
+                        widget.homeListModel!.title!,
                         style: TextStyle(
                           color: CustomColors().getAppBarMainColor(),
                           fontWeight: FontWeight.bold,

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'pages/login/login_page.dart';
+import 'package:gym_app/pages/users_pages/home_trainer_page/home_trainer_page.dart';
 
 void main() {
   runApp(MyApp());
@@ -11,7 +11,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Gym App',
-      home: LoginPage(),
+      home: HomeTrainerPage(),
       debugShowCheckedModeBanner: false,
       theme: ThemeData(primarySwatch: Colors.blue),
     );

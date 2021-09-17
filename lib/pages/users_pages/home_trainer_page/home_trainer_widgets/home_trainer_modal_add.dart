@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:gym_app/shared/models/user.dart';
 
-import 'home_list_model.dart';
-
-class HomeModalAdd extends StatefulWidget {
-  final List<HomeListModel>? listModels;
+class HomeTrainerModalAdd extends StatefulWidget {
+  final List<User>? listModels;
   final Function? fncRefresh;
 
-  HomeModalAdd({this.listModels, this.fncRefresh});
+  HomeTrainerModalAdd({this.listModels, this.fncRefresh});
   @override
-  _HomeModalAddState createState() => _HomeModalAddState();
+  _HomeTrainerModalAddState createState() => _HomeTrainerModalAddState();
 }
 
-class _HomeModalAddState extends State<HomeModalAdd> {
+class _HomeTrainerModalAddState extends State<HomeTrainerModalAdd> {
   TextEditingController _nameController = TextEditingController();
 
   @override
@@ -25,16 +24,20 @@ class _HomeModalAddState extends State<HomeModalAdd> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Text(
-                "Criar Academia",
+                "Adicionar cliente",
                 style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
               ),
               TextFormField(
                 controller: _nameController,
                 decoration: InputDecoration(
-                  labelText: "Qual é o nome da academia?",
+                  labelText: "Qual é o código do cliente?",
                 ),
               ),
-              Padding(padding: EdgeInsets.only(bottom: 25)),
+              Padding(padding: EdgeInsets.only(bottom: 16)),
+              Text(
+                "Insira o código único do atleta para adicionar ele na sua relação de alunos e poder passar os treinos.",
+              ),
+              Padding(padding: EdgeInsets.only(bottom: 24)),
               ElevatedButton(
                 onPressed: () {
                   addInList();
@@ -49,9 +52,10 @@ class _HomeModalAddState extends State<HomeModalAdd> {
   }
 
   addInList() {
-    HomeListModel hml = HomeListModel(
-      title: _nameController.text,
-      assetIcon: "assets/icons/gym_icon.png",
+    //TODO: Fazer conexão com o banco
+
+    User hml = User(
+      name: DateTime.now().toString(),
     );
     setState(() {
       widget.listModels!.add(hml);

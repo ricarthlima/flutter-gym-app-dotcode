@@ -1,8 +1,8 @@
 class LoginModel {
-  String name;
-  String mail;
-  String password;
-  bool keepOn;
+  String? name;
+  String? mail;
+  String? password;
+  bool? keepOn;
 
   LoginModel({this.name, this.mail, this.password, this.keepOn});
 
@@ -24,10 +24,10 @@ class LoginModel {
 
   String toString() {
     return "Name: " +
-        this.name +
+        this.name! +
         "\nE-mail: " +
-        this.mail +
+        this.mail! +
         "\nPassword: " +
-        this.password;
+        this.password!;
   }
 }

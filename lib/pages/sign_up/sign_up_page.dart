@@ -60,7 +60,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 children: [
                   TextFormField(
                     validator: (value) {
-                      if (value.length < 10) {
+                      if (value!.length < 10) {
                         return "Digite um nome maior";
                       }
                       return null;
@@ -82,7 +82,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   ),
                   TextFormField(
                     validator: (value) {
-                      if (value.length < 5) {
+                      if (value!.length < 5) {
                         return "Esse e-mail parece curto demais";
                       } else if (!value.contains("@")) {
                         return "Esse e-mail está meio estranho, não?";
@@ -105,7 +105,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   ),
                   TextFormField(
                     validator: (value) {
-                      if (value.length < 6) {
+                      if (value!.length < 6) {
                         return "A senha deve ter pelo menos 6 caracteres";
                       }
                       return null;
@@ -141,9 +141,9 @@ class _SignUpPageState extends State<SignUpPage> {
                     children: [
                       Checkbox(
                         value: this.showPassword,
-                        onChanged: (bool newValue) {
+                        onChanged: (bool? newValue) {
                           setState(() {
-                            this.showPassword = newValue;
+                            this.showPassword = newValue!;
                           });
                         },
                         activeColor: Colors.blue,
@@ -175,7 +175,7 @@ class _SignUpPageState extends State<SignUpPage> {
   }
 
   void _doSignUp() {
-    if (_formKey.currentState.validate()) {
+    if (_formKey.currentState!.validate()) {
       SignUpService().signUp(
         _mailInputController.text,
         _passwordInputController.text,

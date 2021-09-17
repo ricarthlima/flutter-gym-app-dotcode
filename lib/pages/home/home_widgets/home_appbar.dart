@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-AppBar getHomeAppBar() {
+AppBar getHomeAppBar(String title) {
   return AppBar(
-    title: Text("Minhas Academias"),
+    title: Text(title),
     centerTitle: true,
     backgroundColor: Color(0xff0A6D92), //0xff => #
     actions: [

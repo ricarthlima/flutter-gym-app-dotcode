@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:gym_app/shared/models/schedule_block.dart';
 
-import 'home_list_model.dart';
-
-class HomeModalAdd extends StatefulWidget {
-  final List<HomeListModel>? listModels;
+class ListScheduleModalAdd extends StatefulWidget {
+  final List<ScheduleBlock>? listModels;
   final Function? fncRefresh;
 
-  HomeModalAdd({this.listModels, this.fncRefresh});
+  ListScheduleModalAdd({this.listModels, this.fncRefresh});
   @override
-  _HomeModalAddState createState() => _HomeModalAddState();
+  _ListScheduleModalAddState createState() => _ListScheduleModalAddState();
 }
 
-class _HomeModalAddState extends State<HomeModalAdd> {
+class _ListScheduleModalAddState extends State<ListScheduleModalAdd> {
   TextEditingController _nameController = TextEditingController();
 
   @override
@@ -25,16 +24,23 @@ class _HomeModalAddState extends State<HomeModalAdd> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Text(
-                "Criar Academia",
+                "Criar treino",
                 style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
               ),
               TextFormField(
                 controller: _nameController,
                 decoration: InputDecoration(
-                  labelText: "Qual é o nome da academia?",
+                  labelText: "Nome do treino",
                 ),
               ),
-              Padding(padding: EdgeInsets.only(bottom: 25)),
+              Padding(padding: EdgeInsets.only(bottom: 16)),
+              TextFormField(
+                controller: _nameController,
+                decoration: InputDecoration(
+                  labelText: "Data de término",
+                ),
+              ),
+              Padding(padding: EdgeInsets.only(bottom: 24)),
               ElevatedButton(
                 onPressed: () {
                   addInList();
@@ -49,13 +55,14 @@ class _HomeModalAddState extends State<HomeModalAdd> {
   }
 
   addInList() {
-    HomeListModel hml = HomeListModel(
-      title: _nameController.text,
-      assetIcon: "assets/icons/gym_icon.png",
-    );
-    setState(() {
-      widget.listModels!.add(hml);
-    });
+    //TODO: Fazer conexão com o banco
+
+    // Sch hml = User(
+    //   name: DateTime.now().toString(),
+    // );
+    // setState(() {
+    //   widget.listModels!.add(hml);
+    // });
 
     widget.fncRefresh!();
 

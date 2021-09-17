@@ -1,10 +1,9 @@
-import 'package:gym_app/shared/models/user_abstract.dart';
-import 'package:gym_app/shared/models/user_trainer.dart';
+import 'package:gym_app/shared/models/user.dart';
 
-class UserAdm extends AbstractUser {
-  String gymName;
-  String gymLogoImg;
+class UserAdm {
+  late String gymName;
+  late String gymLogoImg;
 
-  List<int> listTrainerIds;
-  List<UserTrainer> listUserTrainers;
+  late List<int> listTrainerIds;
+  late List<User> listUserTrainers;
 }

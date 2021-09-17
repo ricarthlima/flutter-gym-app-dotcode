@@ -32,9 +32,14 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: getHomeAppBar(),
+      appBar: getHomeAppBar("Minhas Academias"),
       drawer: getHomeDrawer(),
-      floatingActionButton: getHomeFab(context, listModels, refreshPage),
+      floatingActionButton: getHomeFab(
+        isAdm: true,
+        context: context,
+        listHomeListModel: listModels,
+        fncRefresh: refreshPage,
+      ),
       body: HomePageContent(
         listModels: listModels,
       ),

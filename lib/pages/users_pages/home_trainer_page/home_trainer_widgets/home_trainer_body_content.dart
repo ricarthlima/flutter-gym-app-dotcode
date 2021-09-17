@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:gym_app/pages/home/home_widgets/home_list_item.dart';
-import 'package:gym_app/pages/home/home_widgets/home_list_model.dart';
+import 'package:gym_app/pages/users_pages/home_trainer_page/home_trainer_widgets/home_trainer_content_list_item.dart';
 import 'package:gym_app/shared/constants/custom_colors.dart';
+import 'package:gym_app/shared/models/user.dart';
 
-class HomePageContent extends StatefulWidget {
-  final List<HomeListModel>? listModels;
-  HomePageContent({this.listModels});
+class HomeTrainerBodyContent extends StatefulWidget {
+  final List<User>? listModels;
+  HomeTrainerBodyContent({this.listModels});
 
   @override
-  _HomePageContentState createState() => _HomePageContentState();
+  _HomeTrainerBodyContentState createState() => _HomeTrainerBodyContentState();
 }
 
-class _HomePageContentState extends State<HomePageContent> {
+class _HomeTrainerBodyContentState extends State<HomeTrainerBodyContent> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -32,9 +32,7 @@ class _HomePageContentState extends State<HomePageContent> {
       child: ListView.builder(
         itemCount: widget.listModels!.length,
         itemBuilder: (context, index) {
-          return HomeListItem(
-            homeListModel: widget.listModels![index],
-          );
+          return HomeTrainerListItem(widget.listModels![index]);
         },
       ),
     );
